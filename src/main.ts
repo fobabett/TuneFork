@@ -4,7 +4,6 @@ import { AppComponent, environment } from './app/';
 import { provideRouter } from '@angular/router';
 import {provideStore} from '@ngrx/store';
 import {PageRoutes} from './app/routes';
-import {posts} from './app/posts';
 import { FIREBASE_PROVIDERS, defaultFirebase } from 'angularfire2';
 
 if (environment.production) {
@@ -13,7 +12,6 @@ if (environment.production) {
 
 bootstrap(AppComponent, [
 	provideRouter(PageRoutes),
-	provideStore({posts}),
 	FIREBASE_PROVIDERS,
 	defaultFirebase({
 		apiKey: "AIzaSyDb0BJET2DLs9qC3FRRUYkElAbrFeYJEQo",

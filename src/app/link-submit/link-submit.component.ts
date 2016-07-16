@@ -16,24 +16,24 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 export class LinkSubmitComponent implements OnInit {
 
   items: FirebaseListObservable<any>;
+  playlist: Array<any>;
+
   constructor(af: AngularFire, private router: Router) {
     this.items = af.database.list('/items');
+    this.playlist = [];
   }
 
   ngOnInit() {
   }
 
-  upload(item: string) {
-    console.log(item + 'added to playlist');
-    this.items.push(item);
+  upload(track: string) {
+  	this.playlist.push({track: track});
   }
 
   share() {
-    this.items
-      .subscribe(tracks => {
-        let playlist = encodeURIComponent(JSON.stringify(tracks));
-        this.router.navigate(['/playlist']);
-      })
+  	let newPlaylistRef = this.items.push(this.playlist);
+    let playlistID = newPlaylistRef.key;
+    this.router.navigate(['/playlist', playlistID]);
   }
 
 }

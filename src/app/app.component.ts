@@ -19,7 +19,7 @@ export class AppComponent {
   items: FirebaseListObservable<any>;
 
   constructor(af: AngularFire, private router: Router) {//, sanitizer: DomSanitizationService
-    this.items = af.database.list('/items');
+    this.items = af.database.list('/playlists');
     // this.link = sanitizer.bypassSecurityTrustResourceUrl("https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/202111840&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true");
   }
     
