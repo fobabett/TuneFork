@@ -1,7 +1,8 @@
-<form novalidate name="form">
-	<input required type="text" name="track" placeholder="paste link here" [(ngModel)]="track">
-	<button (click)="upload(track)">Upload</button>
-	<button (click)="share()">Share</button>
+<form novalidate name="form" [ngFormModel]="form">
+	<p *ngIf='track.errors && track.dirty'>Please enter a valid youtube, soundcloud or spotify url</p>
+	<input required type="text" name="track" ngControl="track" placeholder="paste link here" [(ngModel)]="form.track">
+	<button (click)="upload(form.track)" [disabled]='track.errors'>Upload</button>
+	<button (click)="share()" [disabled]='playlist.length===0'>Share</button>
 </form>
 <ul *ngFor='let item of playlist'>
 	<li>

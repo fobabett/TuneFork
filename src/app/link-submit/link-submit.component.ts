@@ -3,7 +3,7 @@ import { Control, FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES } from 
 import {Observable} from 'rxjs/Observable';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-
+import { LinkValidator } from '../link-validator';
 
 @Component({
   moduleId: module.id,
@@ -17,13 +17,19 @@ export class LinkSubmitComponent implements OnInit {
 
   items: FirebaseListObservable<any>;
   playlist: Array<any>;
+  track: Control;
+  form: ControlGroup;
 
-  constructor(af: AngularFire, private router: Router) {
+  constructor(af: AngularFire, private router: Router, private builder: FormBuilder) {
     this.items = af.database.list('/items');
     this.playlist = [];
   }
 
   ngOnInit() {
+    this.track = new Control('', Validators.compose([Validators.required, LinkValidator.validUrl]));
+    this.form = this.builder.group({
+      track: this.track
+    });
   }
 
   upload(track: string) {
