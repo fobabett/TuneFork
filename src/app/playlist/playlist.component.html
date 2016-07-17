@@ -1,3 +1,7 @@
-<p>
-  playlist works!
-</p>
+<ul *ngFor='let item of items | async'>
+	<li>
+		{{item.track}}
+		<!-- <iframe [src]="item.$value"></iframe> -->
+	</li>
+</ul>
+<button (click)='fork(id)'>Fork</button>

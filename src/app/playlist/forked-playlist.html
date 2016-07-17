@@ -1,0 +1,11 @@
+<p>forked playlist</p>
+<form novalidate name="form">
+	<input required type="text" name="track" placeholder="paste link here" [(ngModel)]="track">
+	<button (click)="upload(track)">Upload</button>
+	<button (click)="share()">Share</button>
+</form>
+<ul *ngFor='let item of playlist'>
+	<li>
+		{{item.track}}
+	</li>
+</ul>
