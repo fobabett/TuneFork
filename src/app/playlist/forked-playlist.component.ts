@@ -14,6 +14,7 @@ export class ForkedPlaylistComponent implements OnInit {
   id: String;
   items: FirebaseListObservable<any>;
   playlist: Array<any>;
+  forked: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, af: AngularFire) {
   	this.sub = this.route.params.subscribe(params => {
@@ -26,7 +27,9 @@ export class ForkedPlaylistComponent implements OnInit {
     this.forkedItems
       .subscribe(tracks=>{
         tracks.forEach(track =>{
-          this.playlist.push({track: track.track});
+          if(track.track) {
+            this.playlist.push({track: track.track});
+          }
         })
       })
   }

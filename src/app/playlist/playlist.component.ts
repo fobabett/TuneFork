@@ -14,12 +14,23 @@ export class PlaylistComponent implements OnInit {
   items: FirebaseListObservable<any>;
   playlist: Subject<any>;
   id: String;
+  forked: boolean;
+  forkedFrom: string;
 
   constructor(private route: ActivatedRoute, private router: Router, af: AngularFire) {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     })
     this.items = af.database.list('/items/' + this.id); 
+    this.items
+      .subscribe(tracks=>{
+        tracks.forEach(track =>{
+          if(track.fork) {
+            this.forked = true;
+            this.forkedFrom = track.fork.forked_from;
+          }
+        })
+      })
   }
 
   ngOnInit() {
