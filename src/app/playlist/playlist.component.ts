@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
 export class PlaylistComponent implements OnInit {
   private sub: any;
   items: FirebaseListObservable<any>;
-  playlist: Subject<any>;
+  playlist: Array<any>;
   id: String;
   forked: boolean;
   forkedFrom: string;
@@ -21,13 +21,17 @@ export class PlaylistComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     })
-    this.items = af.database.list('/items/' + this.id); 
+    this.items = af.database.list('/items/' + this.id);
+     this.playlist = [];
     this.items
       .subscribe(tracks=>{
         tracks.forEach(track =>{
           if(track.fork) {
             this.forked = true;
             this.forkedFrom = track.fork.forked_from;
+          }
+          if(track.track) {
+            this.playlist.push({track: track.track});
           }
         })
       })
