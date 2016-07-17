@@ -16,7 +16,10 @@ export class ForkedPlaylistComponent implements OnInit {
   playlist: Array<any>;
 
   constructor(private route: ActivatedRoute, private router: Router, af: AngularFire) {
-  	this.forkedItems = af.database.list('/items/-JRHTHaIs-jNPLXOQivY');
+  	this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    })
+    this.forkedItems = af.database.list('/items/' + this.id);
     this.items = af.database.list('/items');
     this.playlist = [];
 
@@ -24,15 +27,14 @@ export class ForkedPlaylistComponent implements OnInit {
       .subscribe(tracks=>{
         tracks.forEach(track =>{
           this.playlist.push({track: track.track});
-          console.log(this.playlist)
         })
       })
   }
 
   ngOnInit() {
-  	this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    })
+  	// this.sub = this.route.params.subscribe(params => {
+   //    this.id = params['id'];
+   //  })
   }
 
   upload(track: string) {

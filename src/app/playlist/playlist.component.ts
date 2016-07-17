@@ -16,18 +16,16 @@ export class PlaylistComponent implements OnInit {
   id: String;
 
   constructor(private route: ActivatedRoute, private router: Router, af: AngularFire) {
-  	this.items = af.database.list('/items/-JRHTHaIs-jNPLXOQivY');
-    this.items
-      .subscribe(tracks=>{
-        console.log(tracks);
-        
-      })
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    })
+    this.items = af.database.list('/items/' + this.id); 
   }
 
   ngOnInit() {
-  	this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    })
+  	// this.sub = this.route.params.subscribe(params => {
+   //    this.id = params['id'];
+   //  })
   }
 
   fork(id: string) {
