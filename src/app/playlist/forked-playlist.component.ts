@@ -45,6 +45,11 @@ export class ForkedPlaylistComponent implements OnInit {
   }
 
   share() {
+    this.playlist.push({
+      fork: {
+        forked_from: this.id
+      }
+    });
     let newPlaylistRef = this.items.push(this.playlist);
     let playlistID = newPlaylistRef.key;
     this.router.navigate(['/playlist', playlistID]);
