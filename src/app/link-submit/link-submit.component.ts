@@ -37,7 +37,7 @@ export class LinkSubmitComponent implements OnInit {
   }
 
   upload(track: string) {
-    console.log(track.substring(0, 17))
+    console.log(track.substring(0, 13))
     // IF SOUNDCLOUD
     // this.soundcloudService
     //   .getPlayer(track)
@@ -50,6 +50,11 @@ export class LinkSubmitComponent implements OnInit {
       let urlID = track.split('v=')[1];
       track = 'https://www.youtube.com/embed/' + urlID;
   	  this.playlist.push({track: track});
+    }
+    if(track.substring(0, 12) == 'https://open') {
+      let urlID = track.split('/track/')[1];
+      track = 'https://embed.spotify.com/?uri=spotify%3Atrack%3A' + urlID;
+      this.playlist.push({track: track});
     }
   }
 
