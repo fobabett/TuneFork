@@ -33,8 +33,16 @@ export class CreatePlaylistComponent implements OnInit {
     this.form = this.builder.group({
       track: this.track
     });
+    console.log('create playlist, on init')
   }
 
+  ngAfterContentInit(){
+    console.log('create playlist, after content init');
+  }
+
+  ngAfterViewInit(){
+    console.log("create playlist, after view init");
+  }
   add(track: string) {
     // IF SOUNDCLOUD
     // this.soundcloudService

@@ -37,6 +37,8 @@ export class PlaylistComponent implements OnInit {
           }
         })
       })
+
+    console.log("constructor, in playlist component");
   }
 
   saniziteUrl(url) {
@@ -44,10 +46,18 @@ export class PlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('hello')
+    console.log('playlist, on init')
   	// this.sub = this.route.params.subscribe(params => {
    //    this.id = params['id'];
    //  })
+  }
+
+  ngAfterContentInit(){
+    console.log('playlist, after content init');
+  }
+
+  ngAfterViewInit(){
+    console.log("playlist, after view init");
   }
 
   fork(id: string) {
