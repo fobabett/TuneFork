@@ -4,8 +4,8 @@
 	<button (click)="upload(form.track)" [disabled]='track.errors'>Upload</button>
 	<button (click)="share()" [disabled]='playlist.length===0'>Share</button>
 </form>
-<ul *ngFor='let item of playlist'>
-	<li>
+<ul>
+	<li *ngFor='let item of playlist'>
 		<!-- {{item.track}} -->
 		<iframe width="560" height="315" [src]="saniziteUrl(item.track)" frameborder="0" allowfullscreen></iframe>
 	</li>

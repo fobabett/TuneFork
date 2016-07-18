@@ -1,0 +1,8 @@
+li {
+	list-style: none;
+	height: 80px;
+	overflow: hidden;
+}
+iframe {
+	height: 80px;
+}

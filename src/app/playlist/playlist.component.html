@@ -1,7 +1,7 @@
 <h1 *ngIf='forked'>Forked from {{forkedFrom}}</h1>
 <p>Forks: 0 Shares: 0 Plays: 0</p>
-<ul *ngFor='let item of playlist'>
-	<li>
+<ul>
+	<li *ngFor='let item of playlist'>
 		<!-- {{item.track}} -->
 		<iframe width="560" height="315" [src]="saniziteUrl(item.track)" frameborder="0" allowfullscreen></iframe>
 	</li>
