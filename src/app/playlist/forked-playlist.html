@@ -6,6 +6,7 @@
 </form>
 <ul *ngFor='let item of playlist'>
 	<li>
-		{{item.track}}
+		<!-- {{item.track}} -->
+		<iframe width="560" height="315" [src]="saniziteUrl(item.track)" frameborder="0" allowfullscreen></iframe>
 	</li>
 </ul>

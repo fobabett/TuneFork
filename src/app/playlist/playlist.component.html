@@ -2,8 +2,8 @@
 <p>Forks: 0 Shares: 0 Plays: 0</p>
 <ul *ngFor='let item of playlist'>
 	<li>
-		{{item.track}}
-		<!-- <iframe [src]="item.$value"></iframe> -->
+		<!-- {{item.track}} -->
+		<iframe width="560" height="315" [src]="saniziteUrl(item.track)" frameborder="0" allowfullscreen></iframe>
 	</li>
 </ul>
 <button (click)='fork(id)'>Fork</button>

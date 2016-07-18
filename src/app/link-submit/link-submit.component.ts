@@ -37,7 +37,6 @@ export class LinkSubmitComponent implements OnInit {
   }
 
   upload(track: string) {
-    console.log(track.substring(0, 13))
     // IF SOUNDCLOUD
     // this.soundcloudService
     //   .getPlayer(track)
