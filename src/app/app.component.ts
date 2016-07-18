@@ -22,7 +22,9 @@ export class AppComponent {
 
   create() {
     this.router.navigate(['/playlist/create']);
-
   }
-    
+
+  demo() {
+    this.router.navigate(['/playlist/-KMwac6YFgxiVN1pDlDx']);
+  }
 }
