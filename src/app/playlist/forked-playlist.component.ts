@@ -23,14 +23,38 @@ export class ForkedPlaylistComponent implements OnInit {
   forked: boolean;
   track: Control;
   form: ControlGroup;
+  af: AngularFire;
 
   constructor(private route: ActivatedRoute, private router: Router, af: AngularFire, private builder: FormBuilder, private sanitizer: DomSanitizationService) {
-  	this.sub = this.route.params.subscribe(params => {
+    this.af = af;
+    this.sanitizer = sanitizer;
+
+  	// this.sub = this.route.params.subscribe(params => {
+   //    this.id = params['id'];
+   //  })
+   //  this.af = af;
+   //  this.sanitizer = sanitizer;
+   //  this.forkedItems = af.database.list('/items/' + this.id);
+   //  this.items = af.database.list('/items');
+   //  this.playlist = [];
+
+   //  this.forkedItems
+   //    .subscribe(tracks=>{
+   //      tracks.forEach(track =>{
+   //        if(track.track) {
+   //          this.playlist.push({track: track.track});
+   //        }
+   //      })
+   //    })
+  }
+
+  ngOnInit() {
+    console.log(this.af)
+    this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     })
-    this.sanitizer = sanitizer;
-    this.forkedItems = af.database.list('/items/' + this.id);
-    this.items = af.database.list('/items');
+    this.forkedItems = this.af.database.list('/items/' + this.id);
+    this.items = this.af.database.list('/items');
     this.playlist = [];
 
     this.forkedItems
@@ -38,19 +62,17 @@ export class ForkedPlaylistComponent implements OnInit {
         tracks.forEach(track =>{
           if(track.track) {
             this.playlist.push({track: track.track});
+            console.log(this.playlist)
           }
         })
       })
-  }
-
-  ngOnInit() {
   	this.track = new Control('', Validators.compose([Validators.required, LinkValidator.validUrl]));
     this.form = this.builder.group({
       track: this.track
     });
   }
 
-  upload(track: string) {
+  add(track: string) {
     // IF SOUNDCLOUD
     // this.soundcloudService
     //   .getPlayer(track)

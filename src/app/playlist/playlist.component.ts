@@ -44,6 +44,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('hello')
   	// this.sub = this.route.params.subscribe(params => {
    //    this.id = params['id'];
    //  })

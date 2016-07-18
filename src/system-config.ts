@@ -49,7 +49,6 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/playlist',
-  'app/link-submit',
   /** @cli-barrel */
 ];
 

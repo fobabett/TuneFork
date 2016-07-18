@@ -9,14 +9,13 @@ import { SoundcloudService } from '../soundcloud-service.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'link-submit',
-  templateUrl: 'link-submit.component.html',
-  styleUrls: ['link-submit.component.css'],
+  selector: 'create-playlist',
+  templateUrl: 'create-playlist.component.html',
   directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
   providers: [SoundcloudService]
 })
 
-export class LinkSubmitComponent implements OnInit {
+export class CreatePlaylistComponent implements OnInit {
 
   items: FirebaseListObservable<any>;
   playlist: Array<any>;
@@ -36,7 +35,7 @@ export class LinkSubmitComponent implements OnInit {
     });
   }
 
-  upload(track: string) {
+  add(track: string) {
     // IF SOUNDCLOUD
     // this.soundcloudService
     //   .getPlayer(track)
