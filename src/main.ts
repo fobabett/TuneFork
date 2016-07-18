@@ -5,6 +5,9 @@ import { provideRouter } from '@angular/router';
 import {provideStore} from '@ngrx/store';
 import {PageRoutes} from './app/routes';
 import { FIREBASE_PROVIDERS, defaultFirebase } from 'angularfire2';
+import { HTTP_PROVIDERS, XHRBackend } from '@angular/http';
+// import { SoundcloudService } from './app/soundcloud-service.service';
+// import { YoutubeService } from './app/youtube-service.service';
 
 if (environment.production) {
   enableProdMode();
@@ -13,6 +16,8 @@ if (environment.production) {
 bootstrap(AppComponent, [
 	provideRouter(PageRoutes),
 	FIREBASE_PROVIDERS,
+	HTTP_PROVIDERS,
+	// { provide: XHRBackend, useClass: SoundcloudService}, is this needed?
 	defaultFirebase({
 		apiKey: "AIzaSyDb0BJET2DLs9qC3FRRUYkElAbrFeYJEQo",
     	authDomain: "tunefork-d0fd0.firebaseapp.com",
