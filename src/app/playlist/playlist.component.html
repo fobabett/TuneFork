@@ -1,0 +1,41 @@
+<div class='content'>
+  
+  <div class='playlist-left clearfix'>
+
+    <div class='playlist-info'>
+      <h1 class='playlist-title'>{{title}}</h1>
+      <h2 class='playlist-url'>tunefork.airshipcms.io/view/{{id}}</h2>
+      <button class='button-copy' (click)='copyLink("tunefork.airshipcms.io/playlist/view/" + id)'>Copy</button>
+      <h3 class='playlist-date'>Created {{createdAt | date: 'longDate'}}</h3>
+    </div>
+    
+    <ul class='list'>
+      <li *ngFor='let item of playlist; let i = "index"' class='playlist-item'>
+        <iframe [ngClass]='{"hidden": !item.play, "soundcloud": item.type==="soundcloud"}' class='song' frameborder="0" allowfullscreen autoplay='true'></iframe>
+        <div [ngClass]='{"hidden": item.play, "soundcloud": item.type==="soundcloud"}' class='image-wrapper' (click)='play(item.embed_url, i)'>
+          <img [src]='item.image_url' [ngClass]='{"soundcloud": item.type==="soundcloud"}'>
+        </div>
+        <h2 class='song-url'>{{item.url}}</h2>
+        <button class='button-copy' (click)='copyLink(item.url)'>Copy</button>
+      </li>
+    </ul>
+  
+  </div>
+  
+  <div class='playlist-right'>
+    <div class='fork-count-container'>
+      <h2>{{fork_count}}</h2>
+      <h3>Forks</h3>
+    </div>
+    <button (click)="fork(id)">Fork this Playlist!</button>
+    <div class='forked-from' *ngIf='forked'>
+      <h3>Forked from:</h3>
+      <h3 (click)='getPlaylist(forkedFrom)'>{{forkedTitle}}</h3>
+      <a (click)='getPlaylist(forkedFrom)'>tunefork.airshipcms.io/view/{{forkedFrom}}</a>
+    </div>
+  </div>
+
+  <textarea id='copyToClipboard'></textarea>
+
+    
+</div>

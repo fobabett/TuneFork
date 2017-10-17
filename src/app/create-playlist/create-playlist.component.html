@@ -1,0 +1,36 @@
+<div class='content'>
+  <form novalidate name="form">
+  
+    <div class='form-left clearfix'>
+      
+      <div class='input-container'>
+        <label>New Playlist</label>
+        <br>
+        <input required type="text" name="title" placeholder="Enter a Playlist Title" [(ngModel)]="title">
+      </div>
+
+      <div class='input-container clearfix'>
+        <label>Add Songs</label>
+        <br>
+        <input class='song-input' required type="text" name="url" placeholder="Paste link here" [(ngModel)]="url">
+        <button (click)="add(form.url)">Add to List</button>
+        <!-- <p class='error-message'>Invalid url.</p> -->
+        <!-- <p class='error-message' *ngIf='soundcloudError'>Unable to add song.</p> -->
+      </div>
+  
+      <ul class='list'>
+        <li *ngFor='let item of playlist; let i="index"' class='playlist-item'>
+          <div class='remove-button' (click)='remove(i)'>x</div>
+          <iframe [ngClass]='{"hidden": !item.play}' class='song' frameborder="0" allowfullscreen autoplay='true'></iframe>
+          <div [ngClass]='{"hidden": item.play}' class=' image-wrapper' (click)='play(item.embed_url, i)'>
+            <img [src]='item.image_url'>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class='form-right'>
+      <button [ngClass]='{disabled: playlist.length==0}' (click)="save(title)" [disabled]='playlist.length==0'>Save & Share Playlist!</button>
+    </div>
+    
+  </form>
+</div>
