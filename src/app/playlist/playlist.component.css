@@ -1,0 +1,71 @@
+.playlist-info {
+	margin-bottom: 50px;
+}
+.playlist-title {
+	font-size: 26px;
+	color: #626B7A;
+}
+.playlist-url {
+	font-size: 14px;
+	border-bottom: 2px dotted #8A95A7;
+	color: #626B7A;
+	margin-right: 5px;
+	font-weight: 100;
+}
+.playlist-date {
+	font-size: 14px;
+	color: #C3C9D5;
+	margin-top: 5px;
+	font-weight: 100;
+}
+.playlist-url,
+.button-copy,
+.song-url {
+	display: inline-block;
+}
+.button-copy {
+	background: #8A95A7;
+	color: #FFFFFF;
+	border-radius: 3px;
+	font-size: 12px;
+	padding: 5px;
+}
+.song-url {
+	font-size: 12px;
+}
+.forked-from {
+	font-size: 12px;
+	margin-top: 50px;
+	color: #8A95A7;
+	border-top: 1px solid #8A95A7;
+	padding-top: 10px;
+}
+.forked-from a {
+	color: #8A95A7;
+}
+.fork-count-container {
+	margin-bottom: 50px;
+}
+.fork-count-container h2{
+	color: #626B7A;
+	font-size: 30px;
+}
+.fork-count-container h3 {
+	font-size: 14px;
+}
+.playlist-item .button-copy {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin: 5px;
+}
+textarea {
+	border: none;
+    color: white;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+}
+textarea::selection {
+	color: white;
+}

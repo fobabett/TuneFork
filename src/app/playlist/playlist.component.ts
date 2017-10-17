@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-playlist',
@@ -8,7 +9,8 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
   styleUrls: ['playlist.component.css', '../create-playlist/create-playlist.component.css', '../app.component.css']
 })
 export class PlaylistComponent implements OnInit {
-  items: any;
+  items: Observable<any[]>;
+  itemsRef: AngularFireList<any>;
   playlist: Array<any>;
   id: String;
   forked: boolean;
@@ -21,11 +23,12 @@ export class PlaylistComponent implements OnInit {
   private itemsSubsrciption: any;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, af: AngularFirestore) {
+  constructor(private route: ActivatedRoute, private router: Router, db: AngularFireDatabase) {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.items = af.collection('/items/' + this.id);
+    this.itemsRef = db.list('items/' + this.id);
+    this.items = this.itemsRef.valueChanges();
     this.playlist = [];
     this.itemsSubsrciption = this.items
       .subscribe(items=> {
@@ -70,8 +73,6 @@ export class PlaylistComponent implements OnInit {
     this.playlist[index].play = true;
     iframes[index].src = embed_url;
     iframes[index].addEventListener('finished', function() {
-      // console.log(this)
-      // console.log('fucked')
     });
   }
 

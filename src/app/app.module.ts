@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AngularFireModule, FirebaseAppProvider } from 'angularfire2'
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { routing, appRoutingProviders } from "./app.routes";
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { FeedComponent } from './feed/feed.component';
     FormsModule,
     HttpModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [appRoutingProviders, FirebaseAppProvider],

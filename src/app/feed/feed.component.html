@@ -1,9 +1,9 @@
 <div class='content'>
   <ul class='playlists-list'>
-    <li class='playlist' *ngFor='let item of items | async' (click)='getPlaylist(item.$key)'>
-      <h2 class='playlist-title'>{{item[item.length-1].title}}</h2>
-      <p class='playlist-url'>tunefork.airshipcms.io/view/{{item.$key}}</p>
-      <p class='playlist-date'>Created {{item[item.length-1].createdAt | date: 'longDate'}}</p>
+    <li class='playlist' *ngFor='let item of items | async' (click)='getPlaylist(item.key)'>
+      <h2 class='playlist-title'>{{ item.payload.val()[item.payload.val().length-1]?.title }}</h2>
+      <p class='playlist-url'>tunefork.airshipcms.io/view/{{ item?.key }}</p>
+      <p class='playlist-date'>Created {{ item.payload.val()[item.payload.val().length-1]?.createdAt | date: 'longDate' }}</p>
       <div class='play-icon'><span>&#9658;</span></div>
     </li>
   </ul>

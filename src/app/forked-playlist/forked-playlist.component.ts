@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 // import { LinkValidator } from '../link-validator';
 import { SoundcloudService } from '../soundcloud.service';
 import { SpotifyService } from '../spotify.service';
 // import { AirshipService } from '../../airship.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'forked-playlist',
@@ -15,10 +16,10 @@ import { SpotifyService } from '../spotify.service';
 })
 
 export class ForkedPlaylistComponent implements OnInit {
-
   forkedItems: any;
-  id: String;
-  items: any;
+  id: string;
+  items: AngularFireList<any>;
+  itemsRef: AngularFireList<any>;
   playlist: Array<any>;
   forked: boolean;
   url: string;
@@ -33,15 +34,15 @@ export class ForkedPlaylistComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private af: AngularFirestore,
+    private db: AngularFireDatabase,
     private sanitizer: DomSanitizer,
     private spotifyService: SpotifyService,
     private soundcloudService: SoundcloudService) {
     this.sanitizer = sanitizer;
-    this.itemsSubsrciption = this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
-    // this.forkedItems = af.database.list('/items/' + this.id);
+    this.id = this.route.snapshot.params.id;
+    this.itemsRef = db.list('items/' + this.id);
+    this.forkedItems = this.itemsRef.valueChanges();
+    this.items = db.list('items');
     // this.items = af.database.list('/items');
     this.playlist = [];
 
@@ -150,7 +151,7 @@ export class ForkedPlaylistComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.itemsSubsrciption.unsubscribe();
+    // this.itemsSubsrciption.unsubscribe();
     this.forkedItemsSubsciption.unsubscribe();
   }
 

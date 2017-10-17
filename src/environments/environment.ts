@@ -9,7 +9,7 @@ export const environment = {
     apiKey: 'AIzaSyDb0BJET2DLs9qC3FRRUYkElAbrFeYJEQo',
     authDomain: 'tunefork-d0fd0.firebaseapp.com',
     databaseURL: 'https://tunefork-d0fd0.firebaseio.com',
-    projectId: '<your-project-id>',
+    projectId: 'tunefork-d0fd0',
     storageBucket: 'tunefork-d0fd0.appspot.com'
   }
 };

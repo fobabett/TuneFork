@@ -4,17 +4,17 @@
     <div class='form-left clearfix'>
       
       <div class='input-container'>
-        <h1>Forked from {{forkedTitle}}</h1>
-        <h2 class='playlist-url'>tunefork.airshipcms.io/view/{{id}}</h2>
+        <h1>Forked from {{ forkedTitle }}</h1>
+        <h2 class='playlist-url'>tunefork.airshipcms.io/view/{{ id }}</h2>
         <br>
-        <input required type="text" name="title" placeholder="Enter a Playlist Title" [(ngModel)]='form.title' value='{{forkedTitle}}' (ngModelChange)='newTitle(form.title)'>
+        <input required type="text" name="title" placeholder="Enter a Playlist Title" [(ngModel)]='title' value='{{ forkedTitle }}' (ngModelChange)='newTitle(title)'>
       </div>
 
       <div class='input-container clearfix'>
         <label>Add Songs</label>
         <br>
-        <input class='song-input' required type="text" name="url" placeholder="Paste link here" [(ngModel)]="form.url">
-        <button (click)="add(form.url)">Add to List</button>
+        <input class='song-input' required type="text" name="url" placeholder="Paste link here" [(ngModel)]="url">
+        <button (click)="add(url)">Add to List</button>
         <!-- <p class='error-message' *ngIf='url.errors && url.dirty'>Invalid url.</p> -->
       </div>
   

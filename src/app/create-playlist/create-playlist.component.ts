@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SoundcloudService } from '../soundcloud.service';
 import { SpotifyService } from '../spotify.service';
 
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 export interface Item { name: string; }
@@ -18,8 +18,7 @@ export interface Item { name: string; }
 })
 
 export class CreatePlaylistComponent implements OnInit {
-
-  items: any;
+  itemsRef: AngularFireList<any>;
   playlist: Array<any>;
   url: string;
   form: any;
@@ -28,14 +27,13 @@ export class CreatePlaylistComponent implements OnInit {
 
   constructor(
     private zone: NgZone,
-    db: AngularFirestore,
     private router: Router,
     // private builder: FormBuilder,
     private soundcloudService: SoundcloudService,
     private spotifyService: SpotifyService,
-    private afs: AngularFirestore,
+    private db: AngularFireDatabase,
     private sanitizer: DomSanitizer) {
-    this.items = afs.collection<Item>('items');
+    this.itemsRef = db.list('items');
     this.playlist = [];
     this.sanitizer = sanitizer;
     this.soundcloudError = false;
@@ -111,7 +109,7 @@ export class CreatePlaylistComponent implements OnInit {
   save(playlistTitle: any) {
     let date = new Date().toString();
     this.playlist.push({title: playlistTitle._value, createdAt: date, fork_count: 0});
-  	let newPlaylistRef = this.items.add(this.playlist);
+  	let newPlaylistRef = this.itemsRef.push(this.playlist);
     let playlistID = newPlaylistRef.key;
     // this.airshipService.createAerostat(playlistID);
     this.router.navigate(['/playlist/view/', playlistID]);

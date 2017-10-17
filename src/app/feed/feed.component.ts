@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -10,11 +10,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FeedComponent {
   items: Observable<any[]>;
+  itemsRef: AngularFireList<any>;
 
-  constructor(private router: Router, db: AngularFirestore) {
+  constructor(private router: Router, private readonly db: AngularFireDatabase) {
     this.router = router;
-    this.items = db.collection('items').valueChanges();
-    console.log(this.items)
+    this.itemsRef = db.list('items');
+    this.items = this.itemsRef.snapshotChanges();
   }
 
   create() {
